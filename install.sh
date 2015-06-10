@@ -1,9 +1,9 @@
 #!/bin/sh
 
+#######################   Python          ########################
+#wget -O Python-2.7.10.tgz --no-check-certificate https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+#tar zxvf Python-2.7.10.tgz
 
-########################  Color scheme  ##########################
-mkdir -p ~/.vim/colors && cd ~/.vim/colors
-wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 ##################################################################
 
 #######################   VIM             ########################
@@ -21,6 +21,11 @@ which vim
 vim --version
 echo "ADD $HOME/bin to you PATH in .bash_profile"
 #################################################################
+
+########################  Color scheme  ##########################
+mkdir -p ~/.vim/colors && cd ~/.vim/colors
+wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
+##################################################################
 
 #######################   Python Plugins ########################
 #pathogen
@@ -45,8 +50,12 @@ cd ~/.vim/bundle
 git clone git://github.com/davidhalter/jedi-vim.git
 #jedi
 #awesome autocompletion/static analysis library for Python
+#download jedi
 cd ~/.vim/bundle/jedi-vim
 git submodule update --init
+#install jedi
+cd jedi
+python setup.py install
 
 #python_editing
 #Python folding
