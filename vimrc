@@ -13,15 +13,19 @@ autocmd! bufwritepost .vimrc source %
 
 
 " Better copy & paste
+"
+" paste: stop doing autoident, make the paste behavior like clipbord paste
 " When you want to paste large blocks of code into vim, press F2 before you
 " paste. At the bottom you should see ``-- INSERT (paste) --``.
-
 set pastetoggle=<F2>
+
+" make the content of the copy in vim available in system clipbord
+" won't work between a remote server and a local server
 set clipboard=unnamed
 
 
 " Mouse and backspace
-set mouse=a  " on OSX press ALT and click
+set mouse=a  " enable using mouse in vim(on OSX press ALT and click)
 set bs=2     " make backspace behave like normal again
 
 
@@ -40,9 +44,9 @@ inoremap <C-n> :nohl<CR>
 
 
 " Quicksave command
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
+noremap <C-z> :update<CR>
+vnoremap <C-z> <C-C>:update<CR>
+inoremap <C-z> <C-O>:update<CR>
 
 
 " Quick quit command
@@ -156,6 +160,13 @@ call pathogen#infect()
 " Settings for ctrlp
 " cd ~/.vim/bundle
 " git clone https://github.com/kien/ctrlp.vim.git
+" Usage: file search
+" CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
+" CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
+" CtrlPMixed to search in Files, Buffers and MRU files at the same time.
+" <c-r> to switch to regexp mode.
+" <c-j>, <c-k> or the arrow keys to navigate the result list.
+" <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
  let g:ctrlp_max_height = 30
  set wildignore+=*.pyc
  set wildignore+=*_build/*
@@ -178,12 +189,16 @@ call pathogen#infect()
 "" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Settings for jedi-vim
+" Note: no longer using this. use YouCompleteMe instead.
 " cd ~/.vim/bundle
 " git clone git://github.com/davidhalter/jedi-vim.git
-let g:jedi#usages_command = "<leader>z"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+""let g:jedi#usages_command = "<leader>z"
+""let g:jedi#popup_on_dot = 0
+""let g:jedi#popup_select_first = 0
+""map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+" YouCompleteMe
+" a autocomplete engine for vim, supporting c,c++,python(using jedi)
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
