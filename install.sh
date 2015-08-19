@@ -93,6 +93,7 @@ mkdir ycm_build
 cd ycm_build
 cmake -G "Unix Makefiles" -DEXTERNAL_LIBCLANG_PATH=$INSTALL/lib/libclang.so . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 make ycm_support_libs
+echo " put .ycm_extra_conf.py file in the root dir of your project"
 
 
 #python_editing

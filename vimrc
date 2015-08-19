@@ -199,6 +199,20 @@ call pathogen#infect()
 
 " YouCompleteMe
 " a autocomplete engine for vim, supporting c,c++,python(using jedi)
+" Note: put .ycm_extra_conf.py file in the root dir of your project
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_confirm_extra_conf = 0
+"let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_complete_in_comments = 1
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_always_populate_location_list = 1
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+set completeopt = "menuone"
+let g:ycm_add_preview_to_completeopt = 0
+let g:syntastic_always_populate_loc_list = 1
+
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
