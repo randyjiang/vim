@@ -6,7 +6,7 @@ INSTALL=$HOME/opt
 echo "add $INSTALL/bin to .bash_profile"
 
 function log(){
-   echo $1, $2
+   echo $1":"$2
 }
 
 #dir for tmp file
@@ -43,12 +43,6 @@ tar zxvf Python-2.7.10.tgz
 cd Python-2.7.10
 ./configure --prefix=$INSTALL
 make && make install
-if [[ $? -ne 0 ]]; then
-   log("ERR", "install python error")
-   exit 1
-else
-   log("MSG", "install python success")
-fi
 ##################################################################
 
 #######################   VIM             ########################
@@ -59,12 +53,6 @@ cd vim74
 cd src
 ./configure --enable-pythoninterp --with-features=huge --prefix=$INSTALL
 make && make install
-if [[ $? -ne 0 ]]; then
-   log("ERR", "install vim error")
-   exit 1
-else
-   log("MSG", "install vim success")
-fi
 #################################################################
 
 ########################  Color scheme  ##########################
@@ -85,19 +73,11 @@ cp pathogen.vim ~/.vim/autoload
 #better-looking,more functional vim statuslines
 cd ~/.vim/bundle
 git clone git://github.com/Lokaltog/vim-powerline.git
-if [[ $? -ne 0 ]]; then
-    log("ERR", "git clone git://github.com/Lokaltog/vim-powerline.git")
-    exit(1)
-fi
 
 #ctrlp
 #Fuzzy file, buffer, mru, tag, etc finder
 cd ~/.vim/bundle
 git clone https://github.com/kien/ctrlp.vim.git
-if [[ $? -ne 0 ]]; then
-    log("ERR", "git clone https://github.com/kien/ctrlp.vim.git")
-    exit(1)
-fi
 
 #Note: no longer use jedi, use YouCompleteMe(which contains jedi support for python)
 #jedi-vim
@@ -116,16 +96,8 @@ fi
 #YouCompleteMe
 cd ~/.vim/bundle
 git clone https://github.com/Valloric/YouCompleteMe.git
-if [[ $? -ne 0 ]]; then
-    log("ERR", "git clone https://github.com/Valloric/YouCompleteMe.git")
-    exit(1)
-fi
 cd YouCompleteMe
 git submodule update --init --recursive
-if [[ $? -ne 0 ]]; then
-    log("ERR", "git submodule update --init --recursive failed for YoucompleteMe")
-    exit(1)
-fi
 #depend on clang (a complier for c++)
 cd $TMP
 tar zxvf llvm-3.4.2.src.tar.gz
