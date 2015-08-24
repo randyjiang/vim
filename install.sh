@@ -42,7 +42,8 @@ cd $TMP
 tar zxvf Python-2.7.10.tgz
 cd Python-2.7.10
 ./configure --prefix=$INSTALL
-make && make install
+make
+make install
 ##################################################################
 
 #######################   VIM             ########################
@@ -52,7 +53,8 @@ tar jxvf vim.tar.bz2
 cd vim74
 cd src
 ./configure --enable-pythoninterp --with-features=huge --prefix=$INSTALL
-make && make install
+make
+make install
 #################################################################
 
 ########################  Color scheme  ##########################
@@ -103,13 +105,15 @@ cd $TMP
 tar zxvf llvm-3.4.2.src.tar.gz
 cd llvm-3.4.2.src
 ./configure --prefix=$INSTALL
-make && make install
+make
+make install
 #depend on cmake
 cd $TMP
 tar zxf cmake-3.3.1.tar.gz
 cd cmake-3.3.1
 ./configure --prefix=$INSTALL
-make && make install
+make
+make install
 #compiling YCM
 cd $TMP
 mkdir ycm_build
