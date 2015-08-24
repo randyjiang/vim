@@ -3,6 +3,10 @@
 INSTALL=$HOME/opt
 echo "add $INSTALL/bin to .bash_profile"
 
+function log(){
+   echo $1, $2
+}
+
 #dir for tmp file
 TMP=$HOME/tmp
 
@@ -14,12 +18,20 @@ if [[ ! -d "$INSTALL" ]]; then
 fi
 
 #######################   Python          ########################
+log("MSG", "begin download python")
 cd $TMP
 wget -O Python-2.7.10.tgz --no-check-certificate https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+log("MSG", "download python success")
 tar zxvf Python-2.7.10.tgz
 cd Python-2.7.10
 ./configure --prefix=$INSTALL
 make && make install
+if [[ $? -ne 0 ]]; then
+   log("ERR", "install python error")
+   exit 1
+else
+   log("MSG", "install python success")
+fi
 ##################################################################
 
 #######################   VIM             ########################
@@ -43,7 +55,7 @@ wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=1
 #Manage your 'runtimepath' with ease.
 #In practical terms, pathogen.vim makes it super easy to install plugins and runtime files in their own private directories
 mkdir -p ~/.vim/autoload ~/.vim/bundle
-curl -o ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+curl -o ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim -k
 
 #powerline
 #better-looking,more functional vim statuslines
@@ -87,6 +99,7 @@ wget http://www.cmake.org/files/v3.3/cmake-3.3.1.tar.gz
 tar zxf cmake-3.3.1.tar.gz
 cd cmake-3.3.1
 ./configure --prefix=$INSTALL
+make && make install
 #compiling YCM
 cd $TMP
 mkdir ycm_build
