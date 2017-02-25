@@ -1,4 +1,12 @@
 #!/bin/sh
+
+################# HOW TO USE THIS ###########################
+#### 1. modify your own library path $INSTALL and INSTALL/bin to .bash_profile
+#### 2. uncomment the software you don't have yet to download (and check whether you can downlaod them )
+#### 3. check whether you can use git command for github (some plugins are downloaded using git from github)
+
+
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 #dir for lib install
@@ -63,7 +71,7 @@ cd $TMP
 cp wombat256mod.vim ~/.vim/colors
 ##################################################################
 
-#######################   Python Plugins ########################
+#######################   Plugins ########################
 #pathogen
 #Manage your 'runtimepath' with ease.
 #In practical terms, pathogen.vim makes it super easy to install plugins and runtime files in their own private directories
@@ -80,20 +88,6 @@ git clone git://github.com/Lokaltog/vim-powerline.git
 #Fuzzy file, buffer, mru, tag, etc finder
 cd ~/.vim/bundle
 git clone https://github.com/kien/ctrlp.vim.git
-
-#Note: no longer use jedi, use YouCompleteMe(which contains jedi support for python)
-#jedi-vim
-#plugin jedi to vim
-##cd ~/.vim/bundle
-##git clone git://github.com/davidhalter/jedi-vim.git
-#jedi
-#awesome autocompletion/static analysis library for Python
-#download jedi
-##cd ~/.vim/bundle/jedi-vim
-##git submodule update --init
-#install jedi
-##cd jedi
-##python setup.py install
 
 #YouCompleteMe
 cd ~/.vim/bundle
