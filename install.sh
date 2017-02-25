@@ -33,7 +33,7 @@ cp -r $DIR/software/* $TMP
 #log("MSG", "begin download python")
 #wget -O Python-2.7.10.tgz --no-check-certificate https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz -q
 #log("MSG", "begin download vim")
-#wget -O vim.tar.bz2 http://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
+#wget -O vim-7.4.tar.bz2 http://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
 #log("MSG", "begin download color scheme")
 #wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 #log("MSG", "begin download pathogen plugin")
@@ -56,7 +56,7 @@ make install
 
 #######################   VIM             ########################
 cd $TMP
-tar jxvf vim.tar.bz2
+tar jxvf vim-7.4.tar.bz2
 #notice the folder name goes with the version
 cd vim74
 cd src
@@ -122,8 +122,7 @@ mkdir -p ~/.vim/ftplugin
 cd $TMP
 cp python_editing.vim ~/.vim/ftplugin
 
-cp $DIR/vimrc ~/.vimrc
-cp $DIR/.ycm_extra_conf.py  ~/.ycm_extra_conf.py
+cp $DIR/.* ~/
 
 echo "=======WARNING!!!============="
 echo "add $INSTALL/bin to PATH in .bash_profile  "
