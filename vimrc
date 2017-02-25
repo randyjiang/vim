@@ -1,19 +1,11 @@
-" Sample .vimrc file by Martin Brochhaus
-" Presented at PyCon APAC 2012
-
-
-" ============================================
-" Note to myself:
-" DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
-" ============================================
-
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
-
+" forces Vim to source .vimrc file if it present in working directory, 
+" thus providing a place to store project-specific configuration
+set exrc
 
 " Better copy & paste
-"
 " paste: stop doing autoident, make the paste behavior like clipbord paste
 " When you want to paste large blocks of code into vim, press F2 before you
 " paste. At the bottom you should see ``-- INSERT (paste) --``.
@@ -28,9 +20,22 @@ set clipboard=unnamed
 set mouse=a  " enable using mouse in vim(on OSX press ALT and click)
 set bs=2     " make backspace behave like normal again
 
+" Real programmers don't use TABs but spaces
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
 
-" Rebind <Leader> key
-" I like to have it here becuase it is easier to reach than the default and
+" try to keep my lines 110 chars at most.  so I highlight column number 110 with color.
+set colorcolumn=110
+highlight ColorColumn ctermbg=darkgray
+
+“ Show the command executing
+set showcmd
+
+" Rebind <Leader> key:
+" I like to have it here because it is easier to reach than the default “\” and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
 
@@ -117,13 +122,6 @@ set history=700
 set undolevels=700
 
 
-" Real programmers don't use TABs but spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-
 
 " Make search case insensitive
 set hlsearch
@@ -139,10 +137,11 @@ set nowritebackup
 set noswapfile
 
 
+“ ========== Plugin Management ===================
 " Setup Pathogen to manage your plugins
 " mkdir -p ~/.vim/autoload ~/.vim/bundle
 " curl -so ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
+" Now you can install any plugin into a .vim/bundle/plugin-name/ folder, and they will be added to the 'runtimepath'. 
 call pathogen#infect()
 
 
@@ -151,13 +150,13 @@ call pathogen#infect()
 " ============================================================================
 
 
-" Settings for vim-powerline
+" vim-powerline:  Powerline is a utility plugin which allows you to create better-looking, more functional vim statuslines
 " cd ~/.vim/bundle
 " git clone git://github.com/Lokaltog/vim-powerline.git
  set laststatus=2
 
 
-" Settings for ctrlp
+"  ctrlp:  Full path fuzzy file, buffer, mru, tag, ... finder for Vim
 " cd ~/.vim/bundle
 " git clone https://github.com/kien/ctrlp.vim.git
 " Usage: file search
@@ -173,38 +172,11 @@ call pathogen#infect()
  set wildignore+=*/coverage/*
 
 
-" Settings for python-mode
-" Note: I'm no longer using this. Leave this commented out
-" and uncomment the part about jedi-vim instead
-" cd ~/.vim/bundle
-" git clone https://github.com/klen/python-mode
-"" map <Leader>g :call RopeGotoDefinition()<CR>
-"" let ropevim_enable_shortcuts = 1
-"" let g:pymode_rope_goto_def_newwin = "vnew"
-"" let g:pymode_rope_extended_complete = 1
-"" let g:pymode_breakpoint = 0
-"" let g:pymode_syntax = 1
-"" let g:pymode_syntax_builtin_objs = 0
-"" let g:pymode_syntax_builtin_funcs = 0
-"" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
-
-" Settings for jedi-vim
-" Note: no longer using this. use YouCompleteMe instead.
-" cd ~/.vim/bundle
-" git clone git://github.com/davidhalter/jedi-vim.git
-""let g:jedi#usages_command = "<leader>z"
-""let g:jedi#popup_on_dot = 0
-""let g:jedi#popup_select_first = 0
-""map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
-
-" YouCompleteMe
-" a autocomplete engine for vim, supporting c,c++,python(using jedi)
-" Note: put .ycm_extra_conf.py file in the root dir of your project
+" YouCompleteMe: a autocomplete engine for vim, supporting c,c++,python(using jedi)
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_confirm_extra_conf = 0
-"let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments = 1
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_always_populate_location_list = 1
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
@@ -213,26 +185,3 @@ set completeopt = "menuone"
 let g:ycm_add_preview_to_completeopt = 0
 let g:syntastic_always_populate_loc_list = 1
 
-
-" Better navigating through omnicomplete option list
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
-
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-
-
-" Python folding
-" mkdir -p ~/.vim/ftplugin
-" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
-set nofoldenable
