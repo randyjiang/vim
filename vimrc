@@ -145,11 +145,6 @@ set noswapfile
 call pathogen#infect()
 
 
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
-
 " vim-powerline:  Powerline is a utility plugin which allows you to create better-looking, more functional vim statuslines
 " cd ~/.vim/bundle
 " git clone git://github.com/Lokaltog/vim-powerline.git
